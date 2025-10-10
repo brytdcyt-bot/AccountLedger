@@ -1,0 +1,139 @@
+:root {
+    --bg: #f4f6fa;
+    --primary: #004aad;
+    --primary-light: #0066cc;
+    --danger: #d44;
+    --success: #0a963e;
+    --shadow: rgba(0,0,0,0.1);
+    --radius: 10px;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background-color: var(--bg);
+    color: #222;
+}
+
+header {
+    text-align: center;
+    background-color: var(--primary);
+    color: white;
+    padding: 1.5em 0;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+main {
+    max-width: 960px;
+    margin: 2em auto;
+    padding: 0 1em;
+}
+
+section {
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 5px var(--shadow);
+    margin-bottom: 2em;
+    padding: 1.5em;
+}
+
+h2 {
+    color: var(--primary);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.4em;
+    margin-top: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+}
+
+input {
+    flex: 1;
+    padding: 0.6em;
+    border: 1px solid #ccc;
+    border-radius: var(--radius);
+    font-size: 1em;
+}
+
+.btn {
+    background-color: var(--primary-light);
+    border: none;
+    padding: 0.8em 1.5em;
+    border-radius: var(--radius);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--primary);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.8em;
+    border-bottom: 1px solid #eee;
+}
+
+th.right, td.right {
+    text-align: right;
+}
+
+tr:hover {
+    background-color: #f1f6ff;
+}
+
+.amount-positive {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.amount-negative {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.loader {
+    text-align: center;
+    color: #777;
+    padding: 2em;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    color: #666;
+    font-size: 0.9em;
+    border-top: 1px solid #ddd;
+}
