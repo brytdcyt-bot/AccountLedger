@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger App Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #1e1e2f;
+            --secondary-color: #2d2d44;
+            --accent-color: #4cd137;
+            --danger-color: #e84118;
+            --text-color: #f5f5f5;
+            --light-bg: #f7f7fc;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--light-bg);
+            color: #222;
+        }
+
+        /* Sidebar */
+        nav {
+            width: 250px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1rem;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        nav a:hover { background-color: var(--secondary-color); }
+
+        /* Main content */
+        main {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 { margin-top: 0; font-weight: 500; color: var(--primary-color); }
+
+        /* Transaction form */
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        form .form-group { display: flex; flex-direction: column; }
+
+        label { margin-bottom: 0.25rem; font-weight: 500; }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.4rem;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #fff;
+            grid-column: span 2;
+            justify-self: start;
+        }
+
+        .btn-primary:hover { background-color: #44bd32; }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .btn-danger:hover { background-color: #c23616; }
+
+        /* Ledger table */
+        .table-container {
+            overflow-x: auto;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+
+        th, td { padding: 0.75rem; border-bottom: 1px solid #eee; text-align: left; }
+
+        th { background-color: var(--secondary-color); color: var(--text-color); }
+
+        tr:hover td { background-color: #f0f0f5; }
+
+        .amount-positive { color: var(--accent-color); font-weight: 500; }
+        .amount-negative { color: var(--danger-color); font-weight: 500; }
+
+        tfoot td { font-weight: 600; background-color: #f1f2f6; }
+
+        /* Footer */
+        footer { text-align: center; padding: 1rem; color: #666; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            nav { width: 100%; flex-direction: row; justify-content: space-around; padding: 1rem; }
+            form { grid-template-columns: 1fr; }
+            .btn-primary { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<nav>
+    <h1>Ledger App</h1>
+    <a href="#transactions">Add Transaction</a>
+    <a href="#ledger">Ledger</a>
+    <a href="#reports">Reports</a>
+</nav>
+
+<!-- Main Content -->
+<main>
+    <!-- Transaction Form -->
+    <section id="transactions">
+        <h2>Add Transaction</h2>
+        <form id="transactionForm" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" placeholder="e.g. Office Supplies" required>
+            </div>
+
+            <div class="form-group">
+                <label for="vendor">Vendor</label>
+                <input type="text" id="vendor" name="vendor" placeholder="e.g. Staples" required>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" name="amount" placeholder="+100 or -50" step="0.01" required>
+            </div>
+
+            <button type="submit" class="btn-primary">Add Transaction</button>
+        </form>
+    </section>
+
+    <!-- Ledger Table -->
+    <section id="ledger">
+        <h2>Ledger</h2>
+        <button id="resetLedger" class="btn-danger">Reset Ledger</button>
+        <div class="table-container">
+            <table id="ledgerTable">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Description</th>
+                    <th>Vendor</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="5" style="text-align:center;">No transactions yet</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4" style="text-align:right">Total:</td>
+                    <td id="totalAmount">0.00</td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section id="reports">
+        <h2>Reports</h2>
+        <p>Summary and analytics will appear here.</p>
+    </section>
+</main>
+
+<footer>
+    &copy; <span id="year"></span> Ledger App
+</footer>
+
+<!-- Scripts -->
+<script>
+    // Auto-update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<script src="../loadTransaction.js" defer></script>
+</body>
+</html>
