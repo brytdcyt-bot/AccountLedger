@@ -5,25 +5,35 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * Represents a financial transaction in the ledger system.
+ */
 public class Transaction {
-    private String date;
-    private String time;
-    private String description;
-    private String vendor;
-    private double amount;
 
-    // Constructors
-    public Transaction() {}
+    private String date;        // yyyy-MM-dd
+    private String time;        // HH:mm:ss
+    private String description; // Transaction purpose or label
+    private String vendor;      // Vendor or payer/payee
+    private double amount;      // Positive for deposit, negative for payment
+
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    // --- Constructors ---
+
+    public Transaction() {
+        // Required for Gson / CSV deserialization
+    }
 
     public Transaction(String date, String time, String description, String vendor, double amount) {
-        this.date = date;
-        this.time = time;
-        this.description = description;
-        this.vendor = vendor;
+        this.date = Objects.requireNonNullElse(date, LocalDate.now().toString());
+        this.time = Objects.requireNonNullElse(time, LocalTime.now().withNano(0).format(TIME_FORMATTER));
+        this.description = description == null ? "" : description.trim();
+        this.vendor = vendor == null ? "" : vendor.trim();
         this.amount = amount;
     }
 
-    // Getters and setters
+    // --- Getters / Setters ---
+
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
 
@@ -31,34 +41,56 @@ public class Transaction {
     public void setTime(String time) { this.time = time; }
 
     public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) { this.description = description == null ? "" : description.trim(); }
 
     public String getVendor() { return vendor; }
-    public void setVendor(String vendor) { this.vendor = vendor; }
+    public void setVendor(String vendor) { this.vendor = vendor == null ? "" : vendor.trim(); }
 
     public double getAmount() { return amount; }
     public void setAmount(double amount) { this.amount = amount; }
 
-    // Utilities
+    // --- Utility Methods ---
+
+    /** Converts string date to LocalDate */
     public LocalDate getLocalDate() {
-        return LocalDate.parse(date);
+        try {
+            return LocalDate.parse(date);
+        } catch (Exception e) {
+            Logger.warn("Invalid date format for transaction: " + date);
+            return LocalDate.now();
+        }
     }
 
+    /** Converts string time to LocalTime */
     public LocalTime getLocalTime() {
-        return LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        try {
+            return LocalTime.parse(time, TIME_FORMATTER);
+        } catch (Exception e) {
+            Logger.warn("Invalid time format for transaction: " + time);
+            return LocalTime.now();
+        }
+    }
+
+    /** Checks if this transaction is a deposit (amount > 0) */
+    public boolean isDeposit() {
+        return amount > 0;
+    }
+
+    /** Checks if this transaction is a payment (amount < 0) */
+    public boolean isPayment() {
+        return amount < 0;
     }
 
     @Override
     public String toString() {
-        return String.format("%s | %s | %-20s | %-12s | %10.2f",
+        return String.format("%s | %s | %-20s | %-15s | %10.2f",
                 date, time, description, vendor, amount);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Transaction)) return false;
-        Transaction that = (Transaction) o;
+        if (!(o instanceof Transaction that)) return false;
         return Double.compare(that.amount, amount) == 0 &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(time, that.time) &&

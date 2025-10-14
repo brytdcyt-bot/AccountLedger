@@ -1,65 +1,69 @@
-async function loadTransactions() {
-    const loader = document.getElementById('loader');
-    const table = document.getElementById('ledgerTable');
-    const tbody = document.getElementById('ledgerBody');
+const API_BASE = "http://localhost:8080/api";
 
-    loader.classList.remove('hidden');
-    table.classList.add('hidden');
-    tbody.innerHTML = '';
-
-    try {
-        const res = await fetch('/api/transactions');
-        if (!res.ok) throw new Error('Failed to load transactions.');
-        const transactions = await res.json();
-
-        if (!Array.isArray(transactions) || transactions.length === 0) {
-            loader.textContent = 'No transactions found.';
-            return;
-        }
-
-        transactions.forEach(t => {
-            const tr = document.createElement('tr');
-
-            const date = new Date(t.dateTime).toLocaleString();
-            const amountClass = t.amount >= 0 ? 'amount-positive' : 'amount-negative';
-
-            tr.innerHTML = `
-        <td>${date}</td>
-        <td>${t.description}</td>
-        <td>${t.vendor}</td>
-        <td class="right ${amountClass}">${t.amount.toFixed(2)}</td>
-      `;
-            tbody.appendChild(tr);
-        });
-
-        loader.classList.add('hidden');
-        table.classList.remove('hidden');
-    } catch (err) {
-        loader.textContent = 'Error loading transactions.';
-        console.error(err);
-    }
-}
-
-document.getElementById('addForm').addEventListener('submit', async e => {
+// Submit transaction form
+document.getElementById("transactionForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const params = new URLSearchParams(formData);
+    const description = document.getElementById("description").value.trim();
+    const vendor = document.getElementById("vendor").value.trim();
+    const amount = parseFloat(document.getElementById("amount").value);
 
-    const amount = parseFloat(formData.get('amount'));
-    if (isNaN(amount)) {
-        alert('Amount must be a valid number.');
+    if (!description || !vendor || isNaN(amount)) {
+        alert("Please fill all fields correctly.");
         return;
     }
 
     try {
-        const res = await fetch('/api/add?' + params.toString(), { method: 'POST' });
-        if (!res.ok) throw new Error('Failed to add transaction.');
+        const res = await fetch(`${API_BASE}/transactions`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ description, vendor, amount })
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || "Unknown server error");
+        }
+
         e.target.reset();
-        await loadTransactions();
-    } catch (err) {
-        console.error(err);
-        alert('Error saving transaction.');
+        await loadLedger();
+    } catch (error) {
+        console.error("Transaction error:", error);
+        alert("Failed to add transaction: " + error.message);
     }
 });
 
-document.addEventListener('DOMContentLoaded', loadTransactions);
+// Load ledger table
+async function loadLedger() {
+    try {
+        const res = await fetch(`${API_BASE}/transactions`);
+        if (!res.ok) throw new Error("Server returned status " + res.status);
+
+        const transactions = await res.json();
+        const tbody = document.querySelector("#ledgerTable tbody");
+        tbody.innerHTML = "";
+
+        if (transactions.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No transactions yet</td></tr>`;
+            return;
+        }
+
+        transactions.forEach(t => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${t.date}</td>
+                <td>${t.time}</td>
+                <td>${t.description}</td>
+                <td>${t.vendor}</td>
+                <td style="color:${t.amount >= 0 ? '#00ff99' : '#ff4b2b'};">${t.amount.toFixed(2)}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    } catch (error) {
+        console.error("Ledger load error:", error);
+        const tbody = document.querySelector("#ledgerTable tbody");
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: #ff4b2b;">Failed to load ledger</td></tr>`;
+    }
+}
+
+// Auto-load on page ready
+window.addEventListener("DOMContentLoaded", loadLedger);
