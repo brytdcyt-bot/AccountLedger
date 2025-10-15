@@ -12,12 +12,23 @@ body {
     line-height: 1.5;
 }
 
+/* --- Variables --- */
+:root {
+    --border-radius: 14px;
+    --glass-bg: rgba(255,255,255,0.08);
+    --glass-hover: rgba(255,255,255,0.15);
+    --accent-gradient: linear-gradient(to right, #ff4b2b, #ff416c);
+    --refresh-gradient: linear-gradient(to right, #0072ff, #00c6ff);
+    --table-header: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(0,0,0,0.3));
+}
+
 /* --- Header --- */
 header {
     text-align: center;
     padding: 2rem 0;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.25);
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    border-radius: var(--border-radius);
 }
 header h1 {
     font-size: 2.5rem;
@@ -29,10 +40,19 @@ main {
     max-width: 900px;
     margin: 2rem auto;
     padding: 2rem;
-    background: rgba(255,255,255,0.05);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    background: var(--glass-bg);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    position: relative;
+}
+main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(106,17,203,0.15), rgba(37,117,252,0.15));
+    z-index: -1;
 }
 
 /* --- Form --- */
@@ -42,10 +62,15 @@ form {
     gap: 10px;
     justify-content: space-between;
     margin-bottom: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
 }
 input, button {
     padding: 0.75rem 1rem;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     border: none;
     font-size: 1rem;
 }
@@ -55,57 +80,76 @@ input {
     background: rgba(255,255,255,0.1);
     color: #fff;
 }
-input::placeholder { color: rgba(255,255,255,0.6); }
+input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
 button {
-    background: linear-gradient(to right, #ff4b2b, #ff416c);
-    color: white;
+    background: var(--accent-gradient);
+    color: #fff;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.15);
 }
 button:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(255,65,108,0.4);
+    box-shadow: 0 6px 20px rgba(255,65,108,0.3);
 }
 
 /* --- Ledger Table --- */
 .table-container {
     overflow-x: auto;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    margin-bottom: 2rem;
 }
 table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     overflow: hidden;
-    background: rgba(0,0,0,0.2);
 }
 thead {
-    background: rgba(0,0,0,0.6);
+    background: var(--table-header);
 }
 th, td {
     padding: 12px 15px;
     text-align: left;
 }
-tbody tr:nth-child(even) { background: rgba(255,255,255,0.1); }
-tbody tr:hover {
-    background: rgba(255,255,255,0.2);
-    transition: 0.2s;
+th {
+    letter-spacing: 1px;
 }
-th { letter-spacing: 1px; }
+tbody tr:nth-child(even) {
+    background: rgba(255,255,255,0.08);
+}
+tbody tr:hover {
+    background: var(--glass-hover);
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.amount-positive { color: #2a9d8f; font-weight: 500; }
+.amount-negative { color: #e76f51; font-weight: 500; }
+tfoot td {
+    font-weight: 600;
+    background: rgba(255,255,255,0.05);
+}
 
-/* --- Refresh Button --- */
+/* --- Refresh / Reset Buttons --- */
 .refresh-btn {
     margin-bottom: 10px;
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     border: none;
-    background: linear-gradient(to right, #0072ff, #00c6ff);
+    background: var(--refresh-gradient);
     color: #fff;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .refresh-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0,198,255,0.4);
+    box-shadow: 0 6px 20px rgba(0,198,255,0.3);
 }
 
 /* --- Footer --- */

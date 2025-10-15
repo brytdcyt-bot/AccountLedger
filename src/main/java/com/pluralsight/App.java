@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class App {
-    public static void main(String[] args) {
+    public static <Transaction> void main(String[] args) {
         final String CSV_FILE = "transactions.csv";
 
         try {
+            CsvUtil CsvUtil;
             List<Transaction> transactions = CsvUtil.loadTransactions(CSV_FILE);
 
             // Start web server

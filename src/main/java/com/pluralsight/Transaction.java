@@ -1,45 +1,34 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Transaction {
-    private LocalDateTime timestamp;
-    private String description;
-    private String vendor;
-    private double amount;
+    private final String date; // YYYY-MM-DD
+    private final String description;
+    private final double amount;
+    private final String vendor;
 
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mm:ss a");
-
-    public Transaction(String description, String vendor, double amount) {
-        this.timestamp = LocalDateTime.now();
+    public Transaction(String date, String description, double amount, String vendor) {
+        this.date = date;
         this.description = description;
-        this.vendor = vendor;
         this.amount = amount;
-    }
-
-    public Transaction(LocalDateTime timestamp, String description, String vendor, double amount) {
-        this.timestamp = timestamp;
-        this.description = description;
         this.vendor = vendor;
-        this.amount = amount;
     }
 
     public String getDate() {
-        return timestamp.format(DATE_FORMAT);
+        return date;
     }
 
-    public String getTime() {
-        return timestamp.format(TIME_FORMAT);
+    public String getDescription() {
+        return description;
     }
 
-    public String getDescription() { return description; }
+    public double getAmount() {
+        return amount;
+    }
 
-    public String getVendor() { return vendor; }
-
-    public double getAmount() { return amount; }
+    public String getVendor() {
+        return vendor;
+    }
 
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s,%.2f", getDate(), getTime(), description, vendor, amount);
+        return date + "|"  + description + "|" + amount + "|" + vendor;
     }
 }

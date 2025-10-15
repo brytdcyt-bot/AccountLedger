@@ -1,6 +1,7 @@
 const API_BASE = "http://localhost:8080/api";
+const POS_COLOR = "var(--accent-color)";
+const NEG_COLOR = "var(--danger-color)";
 
-// Submit transaction form
 document.getElementById("transactionForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const description = document.getElementById("description").value.trim();
@@ -32,7 +33,6 @@ document.getElementById("transactionForm").addEventListener("submit", async (e) 
     }
 });
 
-// Load ledger table
 async function loadLedger() {
     try {
         const res = await fetch(`${API_BASE}/transactions`);
@@ -44,26 +44,35 @@ async function loadLedger() {
 
         if (transactions.length === 0) {
             tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No transactions yet</td></tr>`;
+            document.getElementById("totalAmount").textContent = "0.00";
             return;
         }
 
+        let totalAmount = 0;
+
         transactions.forEach(t => {
+            totalAmount += t.amount;
             const row = document.createElement("tr");
+            row.style.opacity = 0;
             row.innerHTML = `
                 <td>${t.date}</td>
                 <td>${t.time}</td>
                 <td>${t.description}</td>
                 <td>${t.vendor}</td>
-                <td style="color:${t.amount >= 0 ? '#00ff99' : '#ff4b2b'};">${t.amount.toFixed(2)}</td>
+                <td style="color:${t.amount >= 0 ? POS_COLOR : NEG_COLOR};">${t.amount.toFixed(2)}</td>
             `;
             tbody.appendChild(row);
+            requestAnimationFrame(() => row.style.transition = "opacity 0.3s ease-in-out");
+            requestAnimationFrame(() => row.style.opacity = 1);
         });
+
+        document.getElementById("totalAmount").textContent = totalAmount.toFixed(2);
+
     } catch (error) {
         console.error("Ledger load error:", error);
         const tbody = document.querySelector("#ledgerTable tbody");
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: #ff4b2b;">Failed to load ledger</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: ${NEG_COLOR};">Failed to load ledger</td></tr>`;
     }
 }
 
-// Auto-load on page ready
 window.addEventListener("DOMContentLoaded", loadLedger);
