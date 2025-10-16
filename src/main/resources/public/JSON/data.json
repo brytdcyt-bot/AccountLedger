@@ -1,0 +1,13 @@
+{
+  "totalBalance": 3500.75,
+  "totalDeposits": 5000.00,
+  "totalPayments": 1499.25,
+  "lastUpdated": "2025-10-15T15:00:00Z",
+  "recentVendors": [
+    "CafeX",
+    "EmployerInc",
+    "Amazon",
+    "Starbucks",
+    "Netflix"
+  ]
+}

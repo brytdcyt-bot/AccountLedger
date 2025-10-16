@@ -1,0 +1,26 @@
+:root {
+    /* === Backgrounds === */
+    --bg-base: #2c1f14;          /* darker wood/brown base */
+    --bg-panel: #3a2b1f;         /* lighter panel for content */
+    --card-glass: rgba(250, 240, 225, 0.85); /* slightly opaque warm glass */
+
+    /* === Metals / Accents === */
+    --accent-brass: #f1d18a;     /* warm, readable brass */
+    --accent-copper: #e6a364;    /* soft copper highlight */
+    --hover-brass: #f7d78d;      /* slightly brighter for hover states */
+    --border-bronze: #b3946c;    /* muted bronze for borders */
+
+    /* === Text === */
+    --text-light: #fdf6e3;       /* soft cream for contrast */
+    --text-muted: #c5b297;       /* muted beige */
+
+    /* === Shadows === */
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);  /* subtle ambient shadow */
+    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+
+    /* === Font & Layout === */
+    --font-primary: "Libre Baskerville", serif;
+    --font-mono: "Share Tech Mono", monospace;
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}

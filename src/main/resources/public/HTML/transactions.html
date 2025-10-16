@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Transaction – Accounting Ledger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #05050a;
+            --panel: rgba(15, 15, 25, 0.9);
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff00cc;
+            --neon-yellow: #ffee00;
+            --text-light: #e0e0ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at 25% 25%, #0a0a1a, #000);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        nav {
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            padding: 0.75rem 0;
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        nav h1 {
+            margin: 0.3rem 0;
+            font-size: 1.5rem;
+            color: #000;
+            text-shadow: 0 0 4px #fff;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            text-shadow: 0 0 8px var(--neon-yellow);
+        }
+
+        main {
+            width: 90%;
+            max-width: 800px;
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            width: 100%;
+            background: var(--panel);
+            border: 1px solid var(--neon-pink);
+            border-radius: 12px;
+            box-shadow: 0 0 25px var(--neon-pink);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--neon-cyan);
+            background: #000;
+            color: var(--text-light);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .btn {
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            color: #000;
+            background: var(--neon-cyan);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        .preview {
+            margin-top: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--neon-yellow);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 0 10px var(--neon-yellow);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 6px var(--neon-pink);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+<nav>
+    <h1>AEON Ledger</h1>
+    <a href="transactions.html">Add Transaction</a>
+    <a href="ledger.html">Ledger</a>
+    <a href="reports.html">Reports</a>
+    <a href="settings.html">Settings</a>
+    <a href="vendors.html">Vendors</a>
+</nav>
+
+<main>
+    <h2>Add Transaction</h2>
+
+    <form id="transactionForm" autocomplete="off" novalidate>
+        <div>
+            <label for="description">Description</label>
+            <input id="description" name="description" type="text" placeholder="Transaction description" required>
+        </div>
+
+        <div>
+            <label for="vendor">Vendor</label>
+            <input id="vendor" name="vendor" type="text" placeholder="Vendor or source" required>
+        </div>
+
+        <div>
+            <label for="amount">Amount (+ for income / - for expense)</label>
+            <input id="amount" name="amount" type="number" step="0.01" placeholder="e.g. 125.75 or -60.50" required>
+        </div>
+
+        <button type="submit" class="btn">Add Transaction</button>
+    </form>
+
+    <div class="preview" id="previewBox">
+        <strong>Preview:</strong>
+        <p>No transaction yet.</p>
+    </div>
+</main>
+
+<footer>
+    <a href="ledger.html">← Back to Ledger</a>
+</footer>
+
+<script>
+    const form = document.getElementById('transactionForm');
+    const preview = document.getElementById('previewBox');
+
+    form.addEventListener('input', () => {
+        const desc = form.description.value.trim();
+        const vendor = form.vendor.value.trim();
+        const amt = parseFloat(form.amount.value) || 0;
+        preview.innerHTML = `
+        <strong>Preview:</strong>
+        <p>${desc || '(No description)'} with ${vendor || '(No vendor)'} for <span style="color:${amt >= 0 ? 'var(--neon-cyan)' : 'var(--neon-pink)'}">${amt.toFixed(2)}</span></p>
+      `;
+    });
+
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const desc = form.description.value.trim();
+        const vendor = form.vendor.value.trim();
+        const amount = parseFloat(form.amount.value);
+
+        if (!desc || !vendor || isNaN(amount)) {
+            alert('Please fill all fields correctly.');
+            return;
+        }
+
+        const transaction = { description: desc, vendor, amount, date: new Date().toISOString() };
+
+        try {
+            // Replace with real backend call
+            await fetch('/api/transactions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(transaction)
+            });
+            alert('Transaction added successfully!');
+            form.reset();
+            preview.innerHTML = '<strong>Preview:</strong><p>No transaction yet.</p>';
+        } catch (err) {
+            alert('Error: Failed to add transaction.');
+            console.error(err);
+        }
+    });
+</script>
+</body>
+</html>

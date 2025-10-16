@@ -1,0 +1,39 @@
+/* alerts.css - Cleaned & Given a Steampunk Aesthetic */
+.alert {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Alert types using CSS variables for easy theme control */
+.alert-success {
+    background: var(--color-success, #4caf50);
+    color: #fff;
+    border-left: 4px solid var(--accent-brass, #c9a14a);
+}
+
+.alert-danger {
+    background: var(--color-danger, #f44336);
+    color: #fff;
+    border-left: 4px solid var(--accent-copper, #b87333);
+}
+
+.alert-warning {
+    background: var(--color-warning, #ff9800);
+    color: #fff;
+    border-left: 4px solid var(--accent-brass);
+}
+
+/* Fade-in animation */
+.alert.fade-in {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Fade-In Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

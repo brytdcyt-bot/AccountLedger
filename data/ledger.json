@@ -1,0 +1,26 @@
+[
+  {
+    "id": "tx-1",
+    "date": "2025-10-01",
+    "time": "09:00",
+    "description": "Opening Balance",
+    "vendor": "Bank",
+    "amount": 2000
+  },
+  {
+    "id": "tx-2",
+    "date": "2025-10-03",
+    "time": "15:14",
+    "description": "Coffee",
+    "vendor": "CafeX",
+    "amount": -4.5
+  },
+  {
+    "id": "tx-3",
+    "date": "2025-10-04",
+    "time": "17:00",
+    "description": "Salary",
+    "vendor": "Employer Inc",
+    "amount": 2200
+  }
+]

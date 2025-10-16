@@ -1,0 +1,37 @@
+[
+  {
+    "date": "2025-10-14",
+    "time": "09:15:23",
+    "description": "Salary",
+    "vendor": "EmployerInc",
+    "amount": 2000.00
+  },
+  {
+    "date": "2025-10-14",
+    "time": "12:30:45",
+    "description": "Coffee",
+    "vendor": "CafeX",
+    "amount": -4.50
+  },
+  {
+    "date": "2025-10-14",
+    "time": "14:05:12",
+    "description": "Online Shopping",
+    "vendor": "Amazon",
+    "amount": -120.99
+  },
+  {
+    "date": "2025-10-15",
+    "time": "08:00:00",
+    "description": "Freelance Project",
+    "vendor": "ClientXYZ",
+    "amount": 500.00
+  },
+  {
+    "date": "2025-10-15",
+    "time": "18:20:10",
+    "description": "Dinner",
+    "vendor": "Starbucks",
+    "amount": -25.00
+  }
+]

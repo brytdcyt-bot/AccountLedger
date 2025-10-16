@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ledger Reports</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="../JavaScript/reports.js" defer></script>
+</head>
+<body class="fade-in">
+<nav>
+    <h1>Ledger App</h1>
+    <a href="transactions.html">Add Transaction</a>
+    <a href="ledger.html">Ledger</a>
+    <a href="reports.html" class="active">Reports</a>
+    <a href="settings.html">Settings</a>
+    <a href="vendors.html">Vendors</a>
+</nav>
+
+<main>
+    <h2>Financial Reports</h2>
+
+    <!-- 1. Summary Section -->
+    <section id="summary" class="card">
+        <h3>Summary Overview</h3>
+        <div class="summary-grid">
+            <div>
+                <strong>Total Transactions:</strong>
+                <span id="totalTx">0</span>
+            </div>
+            <div>
+                <strong>Total Deposits:</strong>
+                <span id="totalDeposits">0.00</span>
+            </div>
+            <div>
+                <strong>Total Payments:</strong>
+                <span id="totalPayments">0.00</span>
+            </div>
+            <div>
+                <strong>Balance:</strong>
+                <span id="balance">0.00</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Transactions Table -->
+    <section id="txTable" class="card">
+        <h3>Transactions</h3>
+        <div class="table-container">
+            <table id="reportTable">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Description</th>
+                    <th>Vendor</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td colspan="5" style="text-align:center;">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 3. Charts Section -->
+    <section id="charts" class="card">
+        <h3>Visual Reports</h3>
+        <div class="chart-container">
+            <canvas id="spendingChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="vendorChart"></canvas>
+        </div>
+    </section>
+
+    <!-- 4. Filters / Controls -->
+    <section id="filters" class="card">
+        <h3>Filters & Controls</h3>
+        <form id="filterForm">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate">
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate">
+
+            <label for="vendorSelect">Vendor:</label>
+            <select id="vendorSelect" name="vendorSelect">
+                <option value="">All Vendors</option>
+            </select>
+
+            <button type="submit">Apply Filters</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Ledger App — Steampunk dashboards powered by brass, gears, and code.</p>
+</footer>
+
+<script>
+    /* --- Inline JS to keep the page self-contained; external JS can replace this --- */
+    document.addEventListener("DOMContentLoaded", () => {
+        const reportTable = document.getElementById("reportTable").querySelector("tbody");
+        const totalTx = document.getElementById("totalTx");
+        const totalDeposits = document.getElementById("totalDeposits");
+        const totalPayments = document.getElementById("totalPayments");
+        const balance = document.getElementById("balance");
+        const vendorSelect = document.getElementById("vendorSelect");
+
+        let transactions = [];
+
+        async function fetchTransactions() {
+            try {
+                const res = await fetch('/api/transactions');
+                transactions = await res.json();
+                populateTable(transactions);
+                populateSummary(transactions);
+                populateVendorFilter(transactions);
+                renderCharts(transactions);
+            } catch(e) { console.error("Fetch failed:", e); }
+        }
+
+        function populateTable(data) {
+            reportTable.innerHTML = "";
+            if(data.length === 0) {
+                reportTable.innerHTML = '<tr><td colspan="5" style="text-align:center;">No transactions found</td></tr>';
+                return;
+            }
+            data.forEach(tx => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                <td>${tx.date}</td>
+                <td>${tx.time}</td>
+                <td>${tx.description}</td>
+                <td>${tx.vendor}</td>
+                <td>${tx.amount.toFixed(2)}</td>
+            `;
+                reportTable.appendChild(tr);
+            });
+        }
+
+        function populateSummary(data) {
+            const deposits = data.filter(t => t.amount > 0).reduce((sum,t)=>sum+t.amount,0);
+            const payments = data.filter(t => t.amount < 0).reduce((sum,t)=>sum+t.amount,0);
+            totalTx.textContent = data.length;
+            totalDeposits.textContent = deposits.toFixed(2);
+            totalPayments.textContent = payments.toFixed(2);
+            balance.textContent = (deposits+payments).toFixed(2);
+        }
+
+        function populateVendorFilter(data) {
+            const vendors = [...new Set(data.map(t=>t.vendor))].sort();
+            vendors.forEach(v => {
+                const option = document.createElement("option");
+                option.value = v; option.textContent = v;
+                vendorSelect.appendChild(option);
+            });
+        }
+
+        function renderCharts(data) {
+            const ctx1 = document.getElementById("spendingChart").getContext("2d");
+            const ctx2 = document.getElementById("vendorChart").getContext("2d");
+
+            const amounts = data.map(t => t.amount);
+            const labels = data.map(t => t.date);
+
+            new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{ label: 'Transaction Amounts', data: amounts, borderColor: '#c9a14a', backgroundColor: 'rgba(201,161,74,0.2)' }]
+                },
+                options: { responsive:true, plugins:{legend:{display:true}} }
+            });
+
+            const vendorTotals = {};
+            data.forEach(t => vendorTotals[t.vendor] = (vendorTotals[t.vendor]||0)+t.amount);
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(vendorTotals),
+                    datasets: [{ label: 'Amount by Vendor', data: Object.values(vendorTotals), backgroundColor: '#b87333' }]
+                },
+                options: { responsive:true, plugins:{legend:{display:false}} }
+            });
+        }
+
+        document.getElementById("filterForm").addEventListener("submit", e => {
+            e.preventDefault();
+            const start = new Date(document.getElementById("startDate").value);
+            const end = new Date(document.getElementById("endDate").value);
+            const vendor = vendorSelect.value;
+            const filtered = transactions.filter(tx => {
+                const txDate = new Date(tx.date);
+                return (!isNaN(start) ? txDate >= start : true)
+                    && (!isNaN(end) ? txDate <= end : true)
+                    && (vendor ? tx.vendor === vendor : true);
+            });
+            populateTable(filtered);
+            populateSummary(filtered);
+            renderCharts(filtered);
+        });
+
+        fetchTransactions();
+    });
+</script>
+</body>
+</html>

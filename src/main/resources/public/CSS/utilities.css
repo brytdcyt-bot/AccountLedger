@@ -1,0 +1,114 @@
+/* Utilities */
+
+/* === Buttons / Interactive === */
+button, .btn {
+    background: var(--color-primary);
+    color: var(--color-text);
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition), box-shadow 0.25s ease, transform 0.2s ease;
+    box-shadow:
+            0 2px 6px rgba(0,0,0,0.25),
+            0 4px 12px rgba(201,161,74,0.3),
+            inset 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+button:hover, .btn:hover {
+    background: var(--color-primary-dark);
+    box-shadow:
+            0 4px 12px rgba(0,0,0,0.3),
+            0 8px 20px rgba(201,161,74,0.35),
+            inset 0 -3px 6px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+button:active, .btn:active {
+    transform: scale(0.97);
+    box-shadow:
+            0 1px 4px rgba(0,0,0,0.2),
+            0 2px 8px rgba(184,115,51,0.25),
+            inset 0 -1px 3px rgba(0,0,0,0.1);
+}
+
+/* === Cards / Panels === */
+.card {
+    background: var(--color-bg-glass);
+    border-radius: var(--radius);
+    box-shadow:
+            0 4px 15px rgba(0,0,0,0.25),
+            0 8px 25px rgba(201,161,74,0.2),
+            inset 0 -2px 6px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--color-border);
+    transition: var(--transition), transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+            0 6px 20px rgba(0,0,0,0.3),
+            0 12px 30px rgba(201,161,74,0.25),
+            inset 0 -3px 8px rgba(0,0,0,0.12);
+}
+
+/* === Tables === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow:
+            0 4px 15px rgba(0,0,0,0.25),
+            0 8px 25px rgba(201,161,74,0.2);
+    background: var(--color-bg-glass);
+    backdrop-filter: blur(6px);
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+th {
+    background: linear-gradient(145deg, #c9a14a, #b87333); /* brass header gradient */
+    color: #1b120b;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+tr:hover {
+    background: rgba(201,161,74,0.05);
+    transition: background 0.2s ease;
+}
+
+/* === Inputs / Selects === */
+input, select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    font-size: 1rem;
+    transition: var(--transition), box-shadow 0.25s ease, transform 0.2s ease;
+    background: var(--color-bg-glass);
+    color: var(--color-text);
+    backdrop-filter: blur(6px);
+}
+
+input::placeholder,
+select::placeholder {
+    color: var(--color-text-muted);
+}
+
+input:focus, select:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow:
+            0 0 0 3px rgba(201,161,74,0.25),
+            0 0 6px rgba(184,115,51,0.2) inset;
+    transform: translateY(-1px);
+}

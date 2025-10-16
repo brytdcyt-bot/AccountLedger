@@ -1,0 +1,4 @@
+[2025-10-15 17:12:11] Loaded 0 transactions.
+[2025-10-15 17:12:11] WebServer running at http://localhost:8080
+[2025-10-15 18:04:25] Loaded 0 transactions.
+[2025-10-15 18:04:25] Failed to start web server: Address already in use: bind

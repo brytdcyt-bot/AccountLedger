@@ -1,0 +1,45 @@
+/* === Inputs, Selects, Textareas === */
+input, select, textarea {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius, 6px);
+    border: 1px solid rgba(184,115,51,0.5); /* brass-tinted border */
+    font-size: 1rem;
+    background: linear-gradient(145deg, rgba(201,161,74,0.02), rgba(184,115,51,0.02));
+    color: #1b120b;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    box-shadow:
+            0 1px 2px rgba(0,0,0,0.1),
+            inset 0 -1px 2px rgba(0,0,0,0.05);
+}
+
+/* === Focus States === */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #c9a14a;
+    box-shadow:
+            0 0 0 3px rgba(201,161,74,0.15),
+            inset 0 0 2px rgba(0,0,0,0.1);
+    background: linear-gradient(145deg, rgba(201,161,74,0.04), rgba(184,115,51,0.06));
+}
+
+/* === Labels === */
+label {
+    font-weight: 600;
+    color: #1b120b;
+    margin-bottom: 0.25rem;
+    display: block;
+    text-shadow: 0 1px 1px rgba(201,161,74,0.1);
+}
+
+/* === Fieldsets === */
+fieldset {
+    border: 1px solid rgba(184,115,51,0.4);
+    border-radius: var(--radius, 6px);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(145deg, rgba(201,161,74,0.01), rgba(184,115,51,0.02));
+    box-shadow:
+            0 2px 4px rgba(0,0,0,0.1),
+            inset 0 -1px 2px rgba(0,0,0,0.05);
+}

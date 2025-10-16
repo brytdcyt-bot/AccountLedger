@@ -1,0 +1,56 @@
+/* === Fade-in Animation === */
+.fade-in {
+    animation: fadeIn 0.45s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* === Button Press / Click Feedback === */
+.button-press {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.25s ease, background 0.25s ease;
+    background: linear-gradient(145deg, #c9a14a 0%, #b87333 100%);
+    color: #1b120b;
+    border: none;
+    border-radius: var(--radius, 6px);
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        0 4px 10px rgba(201, 161, 74, 0.2),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.button-press:active {
+    transform: scale(0.96);
+    box-shadow:
+            0 1px 3px rgba(0, 0, 0, 0.3),
+            0 3px 8px rgba(201, 161, 74, 0.25),
+            inset 0 -1px 3px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(145deg, #b87333 0%, #c9a14a 100%);
+}
+
+.button-press:hover {
+    transform: scale(1.02);
+    box-shadow:
+            0 3px 8px rgba(0, 0, 0, 0.25),
+            0 6px 15px rgba(201, 161, 74, 0.35),
+            inset 0 -2px 6px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #c9a14a 0%, #b87333 100%);
+}
+
+/* Smoother Gradient */
+.button-press span {
+    text-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.3),
+        0 2px 2px rgba(201, 161, 74, 0.25);
+}
