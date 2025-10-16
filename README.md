@@ -6,7 +6,7 @@ The Account Ledger project is a full-stack, professional-grade dashboard to mana
 The dashboard supports:
 - Add, view, filter, and report transactions.
 - Multi-page interface: Dashboard, Ledger, Settings.
-- Professional, subtle cyberpunk UI with glassy components.
+- Professional UI with glassy components.
 - API-driven architecture for future integration.
 
 ---
