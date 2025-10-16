@@ -15,128 +15,97 @@
 @import url('utilities.css');
 @import url('alerts.css');
 
-:root {
-    :root {
-        --bg-base: hsl(24, 73%, 9%);
-        --bg-panel: hsl(25, 60%, 12%);
-        --accent-brass: hsl(42, 48%, 55%);
-        --accent-copper: hsl(28, 61%, 47%);
-        --text-light: hsl(39, 73%, 85%);
-        --text-muted: hsl(35, 20%, 73%);
-        --border-bronze: hsl(38, 29%, 35%);
-        --hover-brass: hsl(43, 57%, 66%);
-        --card-glow: hsla(42, 48%, 55%, 0.3);
-    }
+/* === Base Resets === */
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    body {
-        margin: 0;
-        font-family: var(--font-mono);
-        background: radial-gradient(circle at 40% 20%, #3b2d21, #2c1f14);
-        background-color: var(--text-primary);
-        color: var(--text-light);
-        line-height: 1.5;
-        overflow-x: hidden;
-    }
+html, body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    background: var(--bg-main);
+    color: var(--text-primary);
+    height: 100%;
+}
 
-    nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        background: linear-gradient(to bottom, #5a432f, #3a2b1f);
-        padding: 0.8em 1em;
-        border-bottom: 2px solid var(--border-bronze);
-        box-shadow: var(--shadow);
-    }
+a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
 
-    nav h1 {
-        font-family: var(--font-mono);
-        font-size: 1.6rem;
-        color: var(--accent-brass);
-        margin: 0;
-        letter-spacing: 1px;
-    }
+a:hover {
+    color: var(--primary-blue);
+}
 
-    nav a {
-        text-decoration: none;
-        color: var(--text-light);
-        padding: 0.5em 1em;
-        border-radius: var(--radius);
-        transition: var(--transition);
-    }
+button {
+    font-family: var(--font-primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
 
-    nav a:hover {
-        background-color: var(--accent-copper);
-        color: var(--text-light);
-    }
+button:focus {
+    outline: none;
+}
 
-    .card {
-        background: var(--card-glass);
-        border-radius: var(--radius);
-        box-shadow: var(--card-shadow);
-        padding: 1.5rem;
-        border: 1px solid var(--border-bronze);
-    }
+/* === Card Component === */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    padding: var(--spacing-md);
+    transition: box-shadow var(--transition-fast);
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: var(--card-shadow);
-        background: var(--card-glass);
-    }
+.card:hover {
+    box-shadow: var(--shadow-hover);
+}
 
-    th, td {
-        padding: 0.6em;
-        border-bottom: 1px solid var(--border-bronze);
-        color: var(--text-light);
-    }
+/* === Alerts === */
+.alert {
+    padding: var(--spacing-sm);
+    border-radius: 6px;
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-small);
+}
 
-    th {
-        background: var(--accent-brass);
-        color: #2c1f14;
-        text-transform: uppercase;
-        font-size: 0.9em;
-    }
+.alert-success {
+    background: var(--success-green);
+    color: #fff;
+}
 
-    tr:nth-child(even) {
-        background: rgba(250, 240, 225, 0.1);
-    }
+.alert-error {
+    background: var(--error-red);
+    color: #fff;
+}
 
-    tfoot td {
-        font-weight: bold;
-        color: var(--hover-brass);
-    }
+.alert-warning {
+    background: var(--warning-orange);
+    color: #fff;
+}
 
-    }
+/* === Buttons === */
+.button-primary {
+    background: var(--primary-blue);
+    color: var(--light-gray);
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+}
 
-    input, select, button {
-        padding: 0.5em;
-        background: hsl(24, 73%, 6%); /* #1c1208 */
-        border: 1px solid var(--border-bronze);
-        color: var(--text-light);
-        border-radius: 4px;
-    }
+.button-primary:hover {
+    background: var(--secondary-blue);
+}
 
-    button {
-        background: linear-gradient(to bottom, var(--accent-brass), var(--accent-copper));
-        color: hsl(0, 0%, 0%); /* #000 */
-    }
+.button-accent {
+    background: var(--accent-gold);
+    color: var(--dark-gray);
+}
 
-    footer {
-        background: hsl(24, 73%, 4%); /* #1a1007 */
-        color: var(--text-muted);
-        border-top: 1px solid var(--border-bronze);
-    }
-
-    footer a:hover {
-        color: var(--hover-brass);
-    }
-
-    nav a.active {
-        color: var(--hover-brass);
-        border-bottom: 2px solid var(--accent-brass);
-    }
-
-
+.button-accent:hover {
+    opacity: 0.85;
+}
