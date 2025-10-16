@@ -40,12 +40,25 @@ The dashboard supports:
 - **Technologies**: HTML5, CSS3, JavaScript (ES6+)
 - **Structure**:
     ```
-    public/
-    ├─ HTML/
-    ├─ CSS/
-    ├─ JavaScript/
-    └─ JSON/
-    ```
+AccountLedger/
+
+├─ public/
+│  ├─ HTML/           
+│  ├─ CSS/          
+│  ├─ JavaScript/    
+│  └─ JSON/   
+
+├─ src/
+│  ├─ main/
+│  │  ├─ java/
+│  │  │  └─ com/accountledger/  
+
+│  │  └─ resources/
+│  │     └─ application.properties
+├─ pom.xml
+
+└─ transactions.csv  
+
 - **CSS Modules**:
     - `variables.css` – theme and colors
     - `style.css` – main layout
