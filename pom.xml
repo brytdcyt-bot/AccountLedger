@@ -4,105 +4,20 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
-    <!-- Project Info -->
     <groupId>com.pluralsight</groupId>
     <artifactId>ledger-app</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
-    <name>Accounting Ledger Application</name>
-    <description>CLI + Web-based Ledger Application built with Java, Spark, and Gson</description>
-
-    <!-- Java version -->
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.jupiter.version>5.10.0</junit.jupiter.version>
-        <spark.version>2.9.4</spark.version>
-        <gson.version>2.10.1</gson.version>
-        <commons.csv.version>1.10.0</commons.csv.version>
     </properties>
 
-    <!-- Dependencies -->
     <dependencies>
-        <!-- SparkJava for lightweight web server -->
+        <!-- Only what’s needed -->
         <dependency>
-            <groupId>com.sparkjava</groupId>
-            <artifactId>spark-core</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-
-        <!-- Gson for JSON serialization -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${gson.version}</version>
-        </dependency>
-
-        <!-- Apache Commons CSV for CSV utilities -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-csv</artifactId>
-            <version>${commons.csv.version}</version>
-        </dependency>
-
-        <!-- JUnit 5 for testing -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
+            <groupId>com.pluralsight</groupId>
+            <artifactId>ledger-app</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
-
-    <!-- Build Plugins -->
-    <build>
-        <plugins>
-            <!-- Compiler plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
-            </plugin>
-
-            <!-- Surefire plugin for JUnit 5 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <includeDependencies>true</includeDependencies>
-                    <useModulePath>false</useModulePath>
-                </configuration>
-            </plugin>
-
-            <!-- Shade plugin for fat JAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.pluralsight.models.App</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
