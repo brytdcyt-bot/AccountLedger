@@ -1,26 +1,32 @@
 :root {
-    /* === Backgrounds === */
-    --bg-base: #2c1f14;          /* darker wood/brown base */
-    --bg-panel: #3a2b1f;         /* lighter panel for content */
-    --card-glass: rgba(250, 240, 225, 0.85); /* slightly opaque warm glass */
+    /* Colors */
+    --neon-cyan: #00ffe0;
+    --neon-pink: #ff007f;
+    --neon-yellow: #fffc00;
+    --neon-green: #00ff99;
+    --neon-purple: #a44cff;
+    --terminal-green: #00ff6a;
+    --error-red: #ff003c;
+    --warning-orange: #ffb347;
+    --dark-bg: #0a0a0f;
+    --card-bg: #141421;
+    --border: #2b2b3f;
+    --text-primary: #e0e0e0;
+    --text-muted: #888;
+    --success: #00ff99;
 
-    /* === Metals / Accents === */
-    --accent-brass: #f1d18a;     /* warm, readable brass */
-    --accent-copper: #e6a364;    /* soft copper highlight */
-    --hover-brass: #f7d78d;      /* slightly brighter for hover states */
-    --border-bronze: #b3946c;    /* muted bronze for borders */
+    /* Shadows and glows */
+    --glow-cyan: 0 0 10px var(--neon-cyan);
+    --glow-pink: 0 0 10px var(--neon-pink);
+    --glow-green: 0 0 10px var(--neon-green);
+    --glow-red: 0 0 10px var(--error-red);
 
-    /* === Text === */
-    --text-light: #fdf6e3;       /* soft cream for contrast */
-    --text-muted: #c5b297;       /* muted beige */
+    /* Typography */
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-future: 'Orbitron', sans-serif;
 
-    /* === Shadows === */
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);  /* subtle ambient shadow */
-    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-
-    /* === Font & Layout === */
-    --font-primary: "Libre Baskerville", serif;
-    --font-mono: "Share Tech Mono", monospace;
-    --radius: 12px;
-    --transition: all 0.3s ease;
+    /* Animation timing */
+    --transition-fast: 0.2s;
+    --transition-medium: 0.5s;
+    --transition-slow: 1s;
 }

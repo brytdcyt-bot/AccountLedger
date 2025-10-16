@@ -1,47 +1,9 @@
-/* === Medium Screens (for Laptops/Tablets) === */
-@media (max-width: 1024px) {
-    main {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        margin-bottom: 1.5rem;
-        box-shadow:
-                0 3px 12px rgba(0,0,0,0.25),
-                0 6px 20px rgba(201,161,74,0.2),
-                inset 0 -2px 6px rgba(0,0,0,0.1);
-    }
-
-    .content {
-        box-shadow:
-                0 3px 12px rgba(0,0,0,0.25),
-                0 6px 20px rgba(201,161,74,0.2),
-                inset 0 -2px 6px rgba(0,0,0,0.1);
-    }
+@media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+    nav { flex-direction: row; overflow-x: auto; }
 }
 
-/* === Small Screens (Phones) === */
 @media (max-width: 600px) {
-    nav {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    table, .card {
-        font-size: 0.9rem;
-    }
-
-    .card, .modal, .sidebar, .content {
-        padding: 1rem;
-        box-shadow:
-                0 2px 8px rgba(0,0,0,0.2),
-                0 4px 12px rgba(201,161,74,0.2),
-                inset 0 -1px 4px rgba(0,0,0,0.08);
-    }
-
-    button, .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.95rem;
-    }
+    header h1 { font-size: 1.1rem; }
+    button, .btn { font-size: 0.8rem; }
 }

@@ -1,41 +1,13 @@
-/* === Charts === */
 .chart-container {
     position: relative;
-    background: linear-gradient(145deg, rgba(201,161,74,0.05), rgba(184,115,51,0.08)); /* subtle brass/copper tint */
-    border-radius: var(--radius, 8px);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow:
-            0 3px 8px rgba(0,0,0,0.2),          /* base depth */
-            0 6px 15px rgba(201,161,74,0.25),   /* warm brass glow */
-            inset 0 -2px 6px rgba(0,0,0,0.1);   /* engraved look */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    background: #101018;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 0 15px rgba(0,255,224,0.1);
 }
 
-/* === Hover Glow === */
-.chart-container:hover {
-    transform: translateY(-3px);
-    box-shadow:
-            0 5px 12px rgba(0,0,0,0.25),
-            0 10px 25px rgba(201,161,74,0.3),
-            inset 0 -2px 6px rgba(0,0,0,0.12);
-    background: linear-gradient(145deg, rgba(201,161,74,0.08), rgba(184,115,51,0.12));
-}
-
-/* === Canvas Styling === */
-.chart-container canvas {
-    width: 100% !important;
-    height: auto !important;
-    border-radius: var(--radius, 8px);
-}
-
-/* === Chart Accents === */
-.chart-container::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    border-radius: var(--radius, 8px);
-    border: 2px solid rgba(201,161,74,0.2); /* thin brass border */
-    pointer-events: none;
+canvas {
+    width: 100%;
+    height: 300px;
 }

@@ -1,75 +1,21 @@
-/* Base Button Styles */
 button, .btn {
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius, 6px);
-    font-weight: 600;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--neon-cyan);
+    font-family: var(--font-mono);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
     cursor: pointer;
-    border: none;
-    transition: var(--transition, all 0.25s ease);
-    background: linear-gradient(145deg, #c9a14a 0%, #b87333 100%);
-    color: #1b120b;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2),
-    0 4px 10px rgba(201, 161, 74, 0.25),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.15);
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-fast);
+    text-transform: uppercase;
 }
 
-/* === Primary Buttons === */
-.btn-primary {
-    background: linear-gradient(145deg, #b87333 0%, #c9a14a 100%);
-    color: #fff;
+button:hover, .btn:hover {
+    background-color: var(--neon-cyan);
+    color: #000;
+    box-shadow: var(--glow-cyan);
 }
 
-.btn-primary:hover {
-    transform: scale(1.05);
-    box-shadow:
-            0 3px 8px rgba(0,0,0,0.25),
-            0 6px 15px rgba(201,161,74,0.35),
-            inset 0 -2px 6px rgba(0,0,0,0.2);
-}
+.btn-danger { border-color: var(--error-red); color: var(--error-red); }
+.btn-success { border-color: var(--success); color: var(--success); }
 
-/* === Accent Buttons === */
-.btn-accent {
-    background: linear-gradient(145deg, #c9a14a 0%, #b87333 100%);
-    color: #fff;
-}
-
-.btn-accent:hover {
-    transform: scale(1.05);
-    box-shadow:
-            0 3px 8px rgba(0,0,0,0.25),
-            0 6px 15px rgba(201,161,74,0.35),
-            inset 0 -2px 6px rgba(0,0,0,0.2);
-}
-
-/* Add Transaction Button */
-#addTransactionBtn {
-    background: linear-gradient(145deg, #c9a14a 0%, #b87333 100%);
-    color: #1b120b;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    border-radius: var(--radius, 6px);
-    cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow:
-            0 2px 6px rgba(0,0,0,0.2),
-            0 4px 12px rgba(201,161,74,0.25),
-            inset 0 -2px 4px rgba(0,0,0,0.15);
-    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
-}
-
-#addTransactionBtn:hover {
-    transform: scale(1.05);
-    box-shadow:
-            0 3px 8px rgba(0,0,0,0.25),
-            0 6px 15px rgba(201,161,74,0.35),
-            inset 0 -2px 6px rgba(0,0,0,0.2);
-}
-
-#addTransactionBtn:active {
-    transform: scale(0.97);
-    box-shadow:
-            0 1px 3px rgba(0,0,0,0.3),
-            0 3px 8px rgba(201,161,74,0.25),
-            inset 0 -1px 3px rgba(0,0,0,0.2);
-}

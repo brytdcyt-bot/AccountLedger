@@ -1,154 +1,21 @@
-/* === Buttons === */
-button, .btn {
-    background: linear-gradient(145deg, #c9a14a 0%, #b87333 100%);
-    color: #1b120b;
-    border: none;
-    border-radius: var(--radius, 6px);
-    padding: 0.65rem 1.25rem;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    box-shadow:
-            0 2px 6px rgba(0,0,0,0.2),
-            0 4px 10px rgba(201,161,74,0.25),
-            inset 0 -1px 3px rgba(0,0,0,0.1);
-}
-
-button:hover, .btn:hover {
-    transform: scale(1.05);
-    box-shadow:
-            0 4px 12px rgba(0,0,0,0.25),
-            0 8px 20px rgba(201,161,74,0.35),
-            inset 0 -2px 6px rgba(0,0,0,0.15);
-}
-
-/* === Pressed Status === */
-.button-press:active {
-    transform: scale(0.96);
-    box-shadow:
-            0 2px 4px rgba(0,0,0,0.25),
-            0 4px 12px rgba(201,161,74,0.2),
-            inset 0 -1px 3px rgba(0,0,0,0.12);
-}
-
-/* Cards / Containers === */
-.card {
-    background: linear-gradient(145deg, rgba(201,161,74,0.05), rgba(184,115,51,0.08));
-    border-radius: var(--radius, 8px);
-    padding: 1.75rem;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    box-shadow:
-            0 3px 8px rgba(0,0,0,0.2),
-            0 6px 15px rgba(201,161,74,0.25),
-            inset 0 -2px 6px rgba(0,0,0,0.1);
-}
-
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow:
-            0 6px 15px rgba(0,0,0,0.25),
-            0 12px 28px rgba(201,161,74,0.3),
-            inset 0 -3px 8px rgba(0,0,0,0.12);
-}
-
-/* === Tables === */
-table {
+.table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: var(--radius, 8px);
-    overflow: hidden;
-    box-shadow:
-            0 2px 6px rgba(0,0,0,0.15),
-            0 4px 10px rgba(201,161,74,0.2);
-    background: linear-gradient(145deg, rgba(201,161,74,0.02), rgba(184,115,51,0.02));
 }
 
-th, td {
-    padding: 0.75rem 1rem;
+.table th, .table td {
+    padding: 0.6rem;
+    border-bottom: 1px solid var(--border);
     text-align: left;
-    border-bottom: 1px solid rgba(184,115,51,0.3);
-    transition: background 0.2s ease;
 }
 
-th {
-    background: linear-gradient(145deg, #b87333 0%, #c9a14a 100%);
-    color: #fff;
-    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
-tr:hover {
-    background: rgba(201,161,74,0.08);
-}
-
-.amount-positive {
-    color: #4CAF50;
-    font-weight: 500;
-}
-
-.amount-negative {
-    color: #f44336;
-    font-weight: 500;
-}
-
-/* === Inputs & Selects === */
-input, select {
-    width: 100%;
-    padding: 0.55rem 0.75rem;
-    border-radius: var(--radius, 6px);
-    border: 1px solid rgba(184,115,51,0.5);
-    font-size: 1rem;
-    transition: box-shadow 0.25s ease, border-color 0.25s ease;
-    background: linear-gradient(145deg, rgba(201,161,74,0.02), rgba(184,115,51,0.02));
-    color: #1b120b;
-}
-
-input::placeholder, select::placeholder {
-    color: rgba(27,18,11,0.6);
-}
-
-input:focus, select:focus {
-    border-color: #c9a14a;
-    outline: none;
-    box-shadow:
-            0 0 0 3px rgba(201,161,74,0.15),
-            inset 0 0 2px rgba(0,0,0,0.1);
-}
-
-/* === Headers / Topography === */
-h1, h2, h3, h4 {
-    color: #1b120b;
-    font-weight: 600;
-    margin-bottom: 0.5em;
-    text-shadow: 0 1px 1px rgba(201,161,74,0.15);
-}
-
-h1 {
-    font-size: 2.25rem;
-    letter-spacing: -0.5px;
-}
-
-p {
-    color: rgba(27,18,11,0.7);
-    margin: 0.5rem 0 1rem;
-}
-
-a {
-    color: #b87333;
-    text-decoration: none;
-    transition: color 0.25s ease;
-}
-
-a:hover {
-    color: #c9a14a;
-}
-
-/* === Animations === */
-.fade-in {
-    animation: fadeIn 0.4s ease forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+.badge.income { background: var(--neon-green); color: #000; }
+.badge.expense { background: var(--neon-pink); color: #000; }

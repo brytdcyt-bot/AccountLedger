@@ -1,21 +1,46 @@
 {
   "name": "ledger-dashboard",
   "version": "1.0.0",
-  "description": "Enterprise-style Account Ledger Dashboard",
+  "description": "Cyberpunk-inspired Enterprise Account Ledger Dashboard",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node ./JavaScript/server.js",
-    "dev": "nodemon ./JavaScript/server.js"
+    "dev": "nodemon ./JavaScript/server.js",
+    "serve": "node ./JavaScript/server.js --env=production",
+    "mock": "node ./JavaScript/mockServer.js",
+    "lint": "eslint . --ext .js,.json",
+    "build": "echo '🧱 Building static frontend...' && mkdir -p dist && cp -r ./HTML ./CSS ./JavaScript ./JSON dist/ && echo '✅ Build complete.'",
+    "docker": "docker build -t ledger-dashboard ."
   },
-  "author": "Your Name",
+  "keywords": [
+    "ledger",
+    "dashboard",
+    "finance",
+    "nodejs",
+    "express",
+    "api",
+    "cyberpunk"
+  ],
+  "author": "Azrael",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-    "body-parser": "^1.20.2"
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.1.0",
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "directories": {
+    "lib": "JavaScript",
+    "test": "tests",
+    "config": "config"
   }
 }

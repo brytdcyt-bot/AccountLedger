@@ -1,11 +1,30 @@
 {
   "appName": "Account Ledger Dashboard",
   "version": "1.0.0",
-  "apiBaseUrl": "/api/transactions",
-  "theme": "light",
-  "currency": "USD",
-  "dateFormat": "YYYY-MM-DD",
-  "timeFormat": "HH:mm:ss",
-  "maxTransactionsPerPage": 50,
-  "notificationsEnabled": true
+  "environment": "development",
+
+  "api": {
+     "baseUrl": "http://localhost:8080/api/transactions",
+      "timeout": 5000,
+      "retryOnFail": true
+  },
+
+  "ui": {
+    "theme": "light",
+    "accentColor": "#007bff",
+    "maxTransactionsPerPage": 50,
+    "notificationsEnabled": true
+  },
+
+  "format": {
+    "currency": "USD",
+    "dateFormat": "YYYY-MM-DD",
+    "timeFormat": "HH:mm:ss",
+    "numberLocale": "en-US"
+  },
+
+  "logging": {
+    "level": "info",
+    "showDebug": false
+  }
 }

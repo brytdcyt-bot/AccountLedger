@@ -1,13 +1,26 @@
-/* === Dark Mode === */
-body.dark-mode {
-    --color-bg: #0f0d08;
-    --color-bg-glass: rgba(35, 28, 15, 0.75);
-    --color-surface: rgba(60, 50, 35, 0.95);
-    --color-text: #f0e6d2;
-    --color-text-muted: rgba(240, 230, 210, 0.7);
-    --color-border: rgba(184, 115, 51, 0.3);
-    --color-primary: #c9a14a;
-    --color-primary-dark: #b87333;
-    --color-accent: #ff9966;
-    --shadow: 0 4px 20px rgba(0,0,0,0.35);
+body.dark {
+    background-color: #030309;
+    color: var(--text-primary);
+}
+
+body.dark header,
+body.dark nav,
+body.dark section,
+body.dark footer {
+    background-color: var(--card-bg);
+    border-color: var(--border);
+}
+
+body.dark button:hover {
+    background-color: var(--neon-cyan);
+    color: #000;
+}
+
+body.dark a {
+    color: var(--neon-pink);
+}
+
+body.dark a:hover {
+    color: var(--neon-cyan);
+    text-shadow: var(--glow-cyan);
 }

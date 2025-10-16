@@ -61,7 +61,7 @@
         <!-- Project-specific dependency if needed -->
         <dependency>
             <groupId>com.pluralsight</groupId>
-            <artifactId>ledger-app</artifactId>
+            <artifactId>LedgerApp</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
