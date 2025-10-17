@@ -1,86 +1,59 @@
-# Account Ledger Application
+# Accounting Ledger
 
-## Overview
-The Account Ledger project is a full-stack, professional-grade dashboard to manage, track, and report financial transactions. Built with Java (Spring Boot) backend and modern HTML/CSS/JS frontend.
-
-The dashboard supports:
-- Add, view, filter, and report transactions.
-- Multi-page interface: Dashboard, Ledger, Settings.
-- Professional UI with glassy components.
-- API-driven architecture for future integration.
+A minimalistic accounting ledger application in **Java** with a simple **HTML/JS/CSS** front-end.  
+This project allows you to track deposits and payments via a REST API and view/filter them in a web-based dashboard.
 
 ---
 
 ## Features
-- **CRUD Transactions**: Add deposits or payments.
-- **Reports**: Month-to-date, previous month, year-to-date, previous year.
-- **Vendor Filtering**: Quickly see transactions per vendor.
-- **Responsive Design**: Works across desktop and mobile.
-- **Dark Theme & Glass UI**: Enterprise, modern style.
-- **Persistence**: Transactions stored in `transactions.csv`.
+
+- Add transactions (deposits or payments) via a simple form.
+- View all transactions in a table.
+- Filter transactions by:
+    - Deposits only
+    - Payments only
+    - Vendor search
+- Saves transactions to a CSV file (`transactions.csv` or `transactions.txt`).
+- Logs activity to `ledger.log`.
+- Runs a lightweight built-in HTTP server (`/api/transactions`) to serve data to the front-end.
 
 ---
 
-## Backend
-- **Language**: Java
-- **Framework**: Spring Boot
-- **Entry Point**: `LedgerApi.java` (monolithic API + CSV persistence + static file serving)
-- **Data Storage**: CSV (`transactions.csv`)
-- **API Endpoints**:
-    - `GET /api/transactions` – all transactions
-    - `POST /api/transactions` – add transaction
-    - `GET /api/transactions/deposits` – deposits only
-    - `GET /api/transactions/payments` – payments only
-    - `GET /api/transactions/vendor/{vendor}` – filter by vendor
-    - `GET /api/transactions/reports/*` – reporting endpoints
+## Project Structure
+
+AccountingLedger/
+├── src/main/java/com/pluralsight/AccountingLedger.java 
+├── src/main/resources/static/
+│ ├── index.html
+│ ├── app.js
+│ └── style.css
+├── transactions.csv # Automatically generated CSV file
+├── ledger.log # Logs created at runtime
+└── README.md
+
+
 
 ---
 
-## Frontend
-- **Technologies**: HTML5, CSS3, JavaScript (ES6+)
-- **Structure**:
-    ```
-AccountLedger/
+## Getting Started
 
-├─ public/
-│  ├─ HTML/           
-│  ├─ CSS/          
-│  ├─ JavaScript/    
-│  └─ JSON/   
+### Prerequisites
 
-├─ src/
-│  ├─ main/
-│  │  ├─ java/
-│  │  │  └─ com/accountledger/  
+- Java 8 or higher
+- Any IDE (IntelliJ, Eclipse) or command line terminal
+- Web browser for the front-end
 
-│  │  └─ resources/
-│  │     └─ application.properties
-├─ pom.xml
+### Running the Application
 
-└─ transactions.csv  
+1. **Compile and run the Java application:**
 
-- **CSS Modules**:
-    - `variables.css` – theme and colors
-    - `style.css` – main layout
-    - `components.css` – cards, buttons, tables
-    - `layout.css` – header, sidebar, content
-    - `utilities.css` – helper classes
-    - `animations.css` – fade, hover, button presses
-    - `theme-dark.css` – optional dark mode
-
-- **JS Modules**:
-    - `app.js` – main dashboard logic
-    - `api.js` – fetch API requests
-    - `loadTransaction.js` – load transactions into table
-    - `reports.js` – report calculations
-    - `settings.js` – configuration settings
-    - `utils.js` – helper functions
-    - `validator.js` – form validation
-    - `vendors.js` – vendor-related utilities
-
----
-
-## Installation & Run
-1. **Clone repository**:
 ```bash
- https://github.com/brytdcyt-bot/AccountLedger.git
+javac -d out src/main/java/com/pluralsight/AccountingLedger.java
+java -cp out com.pluralsight.AccountingLedger
+```
+
+
+---
+
+
+MIT License © Bryan Barie
