@@ -1,0 +1,23 @@
+{
+  "name": "accountingledger",
+  "version": "1.0.0",
+  "description": "The Account Ledger project is a full-stack, professional-grade dashboard to manage, track, and report financial transactions. Built with Java (Spring Boot) backend and modern HTML/CSS/JS frontend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brytdcyt-bot/AccountLedger.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brytdcyt-bot/AccountLedger/issues"
+  },
+  "homepage": "https://github.com/brytdcyt-bot/AccountLedger#readme",
+  "dependencies": {
+    "electron": "^38.3.0"
+  }
+}

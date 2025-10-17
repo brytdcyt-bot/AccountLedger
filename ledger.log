@@ -9,3 +9,7 @@
 [2025-10-17 11:21:26] Web server started at http://localhost:8080
 [2025-10-17 11:25:16] Web server started at http://localhost:8080
 [2025-10-17 11:41:39] Web server started at http://localhost:8080
+[2025-10-17 11:47:55] Web server started at http://localhost:8080
+[2025-10-17 11:59:31] Web server started at http://localhost:8080
+[2025-10-17 12:01:33] Transaction added: 2003-08-28 12:01:33 | Office Supplies | Staples | 100.00
+[2025-10-17 12:01:33] Transaction written to CSV: 2003-08-28 12:01:33 | Office Supplies | Staples | 100.00
