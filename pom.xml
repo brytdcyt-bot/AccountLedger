@@ -3,9 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Project Identity -->
+    <!-- ===================== -->
+    <!-- Project Information   -->
+    <!-- ===================== -->
     <groupId>com.accountledger</groupId>
     <artifactId>account-ledger</artifactId>
     <version>1.0.0</version>
@@ -13,76 +16,85 @@
 
     <name>Account Ledger</name>
     <description>Enterprise-grade Account Ledger Application</description>
-    <url>https://github.com/YOUR_GITHUB_USERNAME/AccountLedger</url>
+    <url>https://github.com/brytdcyt-bot/AccountLedger</url>
 
-    <!-- Parent for Spring Boot -->
+    <!-- ===================== -->
+    <!-- Spring Boot Parent    -->
+    <!-- ===================== -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.4</version>
-        <relativePath/> <!-- Lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <!-- Global Properties -->
+    <!-- ===================== -->
+    <!-- Project Properties    -->
+    <!-- ===================== -->
     <properties>
         <java.version>17</java.version>
-        <spring-cloud.version>2023.0.3</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
     </properties>
 
-    <!-- Dependency Management for Spring Cloud -->
+    <!-- ===================== -->
+    <!-- Dependency Management -->
+    <!-- ===================== -->
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2023.0.3</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <!-- Dependencies -->
+    <!-- ===================== -->
+    <!-- Dependencies          -->
+    <!-- ===================== -->
     <dependencies>
-        <!-- Core Spring Boot -->
+        <!-- === Spring Core === -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- Web / REST support -->
+        <!-- === Web / REST === -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JSON support -->
+        <!-- === JSON === -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-        <!-- Lombok for boilerplate reduction -->
+        <!-- === Lombok === -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Internal LedgerApp dependency (from GitHub Packages) -->
+        <!-- === Custom Internal Dependency (LedgerApp) === -->
         <dependency>
             <groupId>com.pluralsight</groupId>
             <artifactId>LedgerApp</artifactId>
             <version>1.0.0</version>
+            <scope>compile</scope>
         </dependency>
 
-        <!-- Spring Cloud -->
+        <!-- === Spring Cloud === -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -90,17 +102,17 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
         </dependency>
 
-        <!-- Developer tools (runtime only) -->
+        <!-- === Developer Tools === -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Testing -->
+        <!-- === Testing === -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -108,39 +120,52 @@
         </dependency>
     </dependencies>
 
-    <!-- Repositories -->
+    <!-- ===================== -->
+    <!-- Repository Sources    -->
+    <!-- ===================== -->
     <repositories>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/YOUR_GITHUB_USERNAME/AccountLedger</url>
-        </repository>
         <repository>
             <id>spring-releases</id>
             <name>Spring Releases</name>
             <url>https://repo.spring.io/release</url>
         </repository>
+
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/brytdcyt-bot/AccountLedger</url>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
     </repositories>
 
-    <!-- Distribution Management (for publishing your own package) -->
+    <!-- ===================== -->
+    <!-- Distribution (Publish)-->
+    <!-- ===================== -->
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/YOUR_GITHUB_USERNAME/AccountLedger</url>
+            <url>https://maven.pkg.github.com/brytdcyt-bot/AccountLedger</url>
         </repository>
     </distributionManagement>
 
-    <!-- Build Configuration -->
+    <!-- ===================== -->
+    <!-- Build Configuration   -->
+    <!-- ===================== -->
     <build>
         <plugins>
-            <!-- Spring Boot Plugin -->
+            <!-- === Spring Boot === -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Compiler Plugin -->
+            <!-- === Compiler Settings === -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

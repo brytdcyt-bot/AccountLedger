@@ -2,3 +2,10 @@
 [2025-10-15 17:12:11] WebServer running at http://localhost:8080
 [2025-10-15 18:04:25] Loaded 0 transactions.
 [2025-10-15 18:04:25] Failed to start web server: Address already in use: bind
+[2025-10-17 11:18:19] Web server started at http://localhost:8080
+[2025-10-17 11:18:55] Transaction added: 2025-10-17 11:18:55.190962300 | Office Supplies | Staples | 100.00
+[2025-10-17 11:18:55] Transaction written to CSV: 2025-10-17 11:18:55.190962300 | Office Supplies | Staples | 100.00
+[2025-10-17 11:19:40] Web server started at http://localhost:8080
+[2025-10-17 11:21:26] Web server started at http://localhost:8080
+[2025-10-17 11:25:16] Web server started at http://localhost:8080
+[2025-10-17 11:41:39] Web server started at http://localhost:8080

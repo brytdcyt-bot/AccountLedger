@@ -1,9 +1,0 @@
-@media (max-width: 900px) {
-    main { grid-template-columns: 1fr; }
-    nav { flex-direction: row; overflow-x: auto; }
-}
-
-@media (max-width: 600px) {
-    header h1 { font-size: 1.1rem; }
-    button, .btn { font-size: 0.8rem; }
-}
